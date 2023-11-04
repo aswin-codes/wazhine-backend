@@ -3,7 +3,9 @@ const cors = require('cors')
 const authRouter = require('./Router/authRouter')
 const laundriesRouter = require('./Router/laundries')
 const reviewRouter = require('./Router/review')
+const orderRouter = require('./Router/order')
 const server = express();
+
 
 
 //Middle Ware
@@ -20,6 +22,7 @@ server.get('/api/test',(req,res) => {
 server.use('/auth',authRouter);
 server.use('/laundries',laundriesRouter)
 server.use('/reviews',reviewRouter)
+server.use('/order',orderRouter)
 
 server.listen(3000,() => {
     console.log("Server is listing on port 3000")

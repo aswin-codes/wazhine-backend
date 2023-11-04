@@ -47,7 +47,7 @@ router.post("/login", (req, res) => {
 
   // Retrieve user information from the database by email
   const selectQuery =
-    "SELECT user_id, username, email, phonenumber,password FROM user_table WHERE email = $1";
+    "SELECT user_id, username, email, phonenumber,password,type FROM user_table WHERE email = $1";
   pool.query(selectQuery, [email], (error, result) => {
     if (error) {
       return res.status(500).json({ error: "Error during login" });
@@ -73,6 +73,7 @@ router.post("/login", (req, res) => {
           username: user.username,
           email: user.email,
           phonenumber: user.phonenumber,
+          type: user.type
         },
       });
     });

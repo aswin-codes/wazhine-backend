@@ -29,6 +29,27 @@ CREATE TABLE reviews (
     description TEXT,
     shop_id INT REFERENCES laundry_shop(id) NOT NULL,
     user_id INT REFERENCES user_table(user_id) NOT NULL,
-    date_created TIMESTAMP
+    date_created TIMESTAMP DEFAULT current_timestamp
 );
+
+/*For creating orders Table*/
+CREATE TABLE orders (
+    order_id SERIAL PRIMARY KEY,
+    status VARCHAR(255) NOT NULL,
+    shop_id INT REFERENCES laundry_shop(id) NOT NULL,
+    clothes JSONB NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
+    order_date TIMESTAMP DEFAULT current_timestamp
+);
+
+ALTER TABLE orders
+ADD COLUMN user_id INT;
+
+ALTER TABLE orders
+ADD CONSTRAINT fk_user
+    FOREIGN KEY (user_id)
+    REFERENCES user_table (user_id);
+
+
 
